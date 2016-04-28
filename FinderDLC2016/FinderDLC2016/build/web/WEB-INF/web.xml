@@ -8,6 +8,10 @@
         <servlet-name>LecturaDocumento</servlet-name>
         <servlet-class>servlets.LecturaDocumento</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AgregarDocumento</servlet-name>
+        <servlet-class>servlets.AgregarDocumento</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Consulta</servlet-name>
         <url-pattern>/Consulta</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>LecturaDocumento</servlet-name>
         <url-pattern>/LecturaDocumento</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AgregarDocumento</servlet-name>
+        <url-pattern>/AgregarDocumento</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -82,8 +82,8 @@ public class Coordinador {
                 
                 File archivo = new File(doc.getLink());
             
-            System.out.println(doc.getLink());
-            System.out.println(archivo.getPath());
+            //System.out.println(doc.getLink());
+            //System.out.println(archivo.getPath());
 
             try (Scanner sc = new Scanner(archivo, this.getCodificacion(archivo));) {
                 /*

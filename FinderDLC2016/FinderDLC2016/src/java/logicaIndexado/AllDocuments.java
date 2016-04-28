@@ -39,10 +39,10 @@ public class AllDocuments {
      Envia mensajes de la situacion de cada documento en cada caso
       
      */
-    public void addDocument(String link) {
+    public boolean addDocument(String link) {
 
         if (link == null) {
-            return;
+            return false;
         }
        
         Documento d = new Documento(link);
@@ -54,18 +54,21 @@ public class AllDocuments {
                Documento dbd = (Documento) it.next();
                
                //DEBO COMPARAR NOMBRES DE DCUMENTOS O RUTAS RELATIVAS CREO PREFERIBLEMENTE
-               if (dbd.equalsRelativa(d))return;
+               if (dbd.equalsRelativa(d))return false;
                
            }
             
-            // ITERADOR ACA Y COMPARAR O DEBERIA IR EN ALL DOCUMENTS? I DONTKNOW
+          
 
       
         
         if (!this.contieneDoc(d)) {
 
             lista.add(d);
+            return true;
         }
+        
+        return true;
 
     }
 
@@ -100,7 +103,7 @@ public class AllDocuments {
         docsBD = new LinkedList<>();
     }
 
-    private void recuperarDocs() {
+    public void recuperarDocs() {
         docsBD = bdmanager.materializeDocs();
        
     }

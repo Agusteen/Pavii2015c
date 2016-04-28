@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.LinkedList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -58,32 +59,43 @@ public class AgregarDocumento extends HttpServlet {
     }
 
     public void index() throws IOException {
+        LinkedList <String> documentosagregados = new LinkedList<>();
+        LinkedList <String> documentosborrados = new LinkedList<>();
         LecturaDirectorio ld = new LecturaDirectorio();
 
         File[] directorios = ld.leerDirectorio(getServletContext().getRealPath("/") + "..\\..\\..\\NuevosDocumentos");
         Coordinador c = new Coordinador(getServletContext().getRealPath("/"));
+        Path origen = null;
+        Path destino = null;
         for (File documento : directorios) {
-            String path = getServletContext().getRealPath("/") + "..\\..\\..\\NuevosDocumentos\\" + documento.getName();
+            String path = getServletContext().getRealPath("/") + "..\\..\\..\\DocumentosTPtest\\" + documento.getName();
+            origen = Paths.get(getServletContext().getRealPath("/") + "..\\..\\..\\NuevosDocumentos\\" + documento.getName());
+            destino = Paths.get(getServletContext().getRealPath("/") + "..\\..\\..\\DocumentosTPtest");
+            if (c.loadDocs(path)) {
+                //guardar nombres de archivos que se guardaron para mostrar. Los que no estan se borraron
+                documentosagregados.add(documento.getName());
+                try {
+                    Files.move(origen, destino.resolve(origen.getFileName()));
+                } catch (IOException ioex) {
+                    System.out.println(ioex);
+                } catch (Exception ex) {
 
-            c.loadDocs(path);
-
+                }
+            } else {
+                 try {
+                   Files.delete(origen);
+                } catch (IOException ioex) {
+                    System.out.println(ioex);
+                }
+                 finally
+                 {
+                    documentosborrados.add(documento.getName());
+                 }
+                
+            }
         }
-
         c.processdocs();
-        //De esta forma se estaria guardando en bd la ruta de NuevosDocumentos, cuando deberia tener DocumentoTPtest para poder abrirlo despues
-        for (File documento : directorios) {           
-
-            Path origen = Paths.get(getServletContext().getRealPath("/") + "..\\..\\..\\NuevosDocumentos\\" + documento.getName());
-            Path destino = Paths.get(getServletContext().getRealPath("/") + "..\\..\\..\\DocumentosTPtest");
-            try{
-            Files.move(origen, destino.resolve(origen.getFileName()));
-            }
-            catch (IOException ex) {
-                System.out.println(ex);
-            }
-            }
-        }
-    
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

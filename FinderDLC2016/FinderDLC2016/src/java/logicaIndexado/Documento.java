@@ -60,7 +60,9 @@ public class Documento {
     public boolean equalsRelativa(Documento d)
             
     {
-        return (this.getPathRelativa().equals(d.getPathRelativa()));
+        String linkviejo = this.getLink();
+        String docnuevo = d.getPathRelativa();
+        return (this.getLink().equals(d.getPathRelativa()));
     }
     
     

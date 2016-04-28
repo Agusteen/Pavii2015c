@@ -44,11 +44,11 @@ public class Coordinador {
     }
 
     /*Quien cargue los documentos podria llamar a este metodo dandole los links*/
-    public void loadDocs(String link) {
+    public boolean loadDocs(String link) {
         if (!link.isEmpty()) {
-           conjuntodocumentos.addDocument(link);
+          if(conjuntodocumentos.addDocument(link)) return true;
         }
-
+        return false;
     }
 
     public String getCodificacion(File archivo) {

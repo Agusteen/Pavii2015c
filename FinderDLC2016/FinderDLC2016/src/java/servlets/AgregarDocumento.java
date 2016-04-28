@@ -75,10 +75,15 @@ public class AgregarDocumento extends HttpServlet {
 
             Path origen = Paths.get(getServletContext().getRealPath("/") + "..\\..\\..\\NuevosDocumentos\\" + documento.getName());
             Path destino = Paths.get(getServletContext().getRealPath("/") + "..\\..\\..\\DocumentosTPtest");
+            try{
             Files.move(origen, destino.resolve(origen.getFileName()));
-
+            }
+            catch (IOException ex) {
+                System.out.println(ex);
+            }
+            }
         }
-    }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

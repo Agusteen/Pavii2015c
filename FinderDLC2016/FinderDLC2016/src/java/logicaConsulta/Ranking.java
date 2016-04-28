@@ -24,7 +24,7 @@ public class Ranking {
         while (i.hasNext())
         {
             DocumentoConsulta dociterador = (DocumentoConsulta)i.next();
-            if (dociterador == doc){
+            if (dociterador.equals(doc)){
                 dociterador.addPonderacion(doc);
             return;}
         }

@@ -20,11 +20,12 @@ public class AllDocuments {
     private LinkedList<Documento> lista;
     private BDManager bdmanager = BDManager.getBDManager();
     private Coordinador coordinador;
-    private LinkedList<Documento> docsbd;
+    private LinkedList<Documento> docsBD;
 
     public AllDocuments(Coordinador c) {
         lista = new LinkedList<>();
         coordinador = c;
+        this.recuperarDocs();
 
     }
 
@@ -45,7 +46,21 @@ public class AllDocuments {
         }
        
         Documento d = new Documento(link);
+        
+        
+        Iterator it= docsBD.iterator();
+           while (it.hasNext())
+           {
+               Documento dbd = (Documento) it.next();
+               
+               //DEBO COMPARAR NOMBRES DE DCUMENTOS O RUTAS RELATIVAS CREO PREFERIBLEMENTE
+               if (dbd.equalsRelativa(d))return;
+               
+           }
+            
+            // ITERADOR ACA Y COMPARAR O DEBERIA IR EN ALL DOCUMENTS? I DONTKNOW
 
+      
         
         if (!this.contieneDoc(d)) {
 
@@ -61,8 +76,6 @@ public class AllDocuments {
         if (lista.isEmpty()) {
             return false;
         }
-      
-
         //verifica si el documento existe en toda la lista.
         for (Documento d : lista) {
             if (d.equals(doc)) {
@@ -83,12 +96,13 @@ public class AllDocuments {
     public void clear() {
         lista = null;
         lista = new LinkedList<>();
-        docsbd = null;
-        docsbd = new LinkedList<>();
+        docsBD = null;
+        docsBD = new LinkedList<>();
     }
 
-    public void recuperarDocs() {
-        docsbd = bdmanager.materializeDocs();
+    private void recuperarDocs() {
+        docsBD = bdmanager.materializeDocs();
+       
     }
 
     void persistdocumento(Documento doc) {

@@ -57,5 +57,11 @@ public class Documento {
        return (this.getLink().equals(d.getLink()));
    }
     
+    public boolean equalsRelativa(Documento d)
+            
+    {
+        return (this.getPathRelativa().equals(d.getPathRelativa()));
+    }
+    
     
 }

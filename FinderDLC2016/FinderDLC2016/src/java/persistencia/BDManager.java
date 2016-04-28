@@ -361,7 +361,7 @@ public class BDManager {
      *
      * @return retorna una lista con los documentos que se recuperan de la BD.
      */
-    public LinkedList materializeDocs() {
+    public LinkedList<Documento> materializeDocs() {
 
         statement = null;
         Documento d;
@@ -369,9 +369,9 @@ public class BDManager {
 
         try {
             statement = connection.createStatement();
-            rs = statement.executeQuery("select path from DOCUMENTO");
+            rs = statement.executeQuery("select ruta from DOCUMENTO");
             while (rs.next()) {
-                d = new Documento(rs.getString("path"));
+                d = new Documento(rs.getString("ruta"));
                 list.add(d);
             }
 
@@ -379,8 +379,8 @@ public class BDManager {
 
             System.out.println("Error " + ex.getMessage());
         }
+return list;
 
-        return list;
 
     }
 

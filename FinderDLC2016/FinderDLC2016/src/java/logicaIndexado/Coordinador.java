@@ -28,7 +28,7 @@ public class Coordinador {
     
     private AllWords mapapalabras;
     private AllDocuments conjuntodocumentos;
-   
+ 
 
     public Coordinador(String connectionString) {
         bdmanager = BDManager.getBDManager();
@@ -39,13 +39,14 @@ public class Coordinador {
         mapapalabras = new AllWords(this);
         conjuntodocumentos = new AllDocuments(this);
         
+        
       
     }
 
     /*Quien cargue los documentos podria llamar a este metodo dandole los links*/
     public void loadDocs(String link) {
         if (!link.isEmpty()) {
-            conjuntodocumentos.addDocument(link);
+           conjuntodocumentos.addDocument(link);
         }
 
     }
@@ -85,7 +86,7 @@ public class Coordinador {
             //System.out.println(doc.getLink());
             //System.out.println(archivo.getPath());
 
-            try (Scanner sc = new Scanner(archivo, this.getCodificacion(archivo));) {
+            try (Scanner sc = new Scanner(archivo, this.getCodificacion(archivo))) {
                 /*
                 El patron permite separar las cadenas por cualquier caracter que no este comprendido entre
                 a-z;0-9;A-Z; ni sea á;é;í;ó;ú;Á;É;Í;Ó;Ú;ñ;Ñ;ü;Ü; Tampoco guiones (-) para reconocer palabras
@@ -153,10 +154,7 @@ mapapalabras.verificarMaximaRepeticionynuevoDocumento();
 
     
 
-    public void recuperarDocs() {
-
-        conjuntodocumentos.recuperarDocs();
-    }
+   
     
     
 

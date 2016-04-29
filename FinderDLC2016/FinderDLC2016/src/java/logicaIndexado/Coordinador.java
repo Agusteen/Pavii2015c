@@ -70,21 +70,21 @@ public class Coordinador {
         Iterator<Documento> k = conjuntodocumentos.getIteratorDocuments();
         /* Para saber si el indexado esta haciendo algo */
         int docsleidos = 0;
-        int docstotal = conjuntodocumentos.count();
+     //   int docstotal = conjuntodocumentos.count();
 
-      
+       // long time_start, time_end;
+        
+        
         while (k.hasNext()) {
-
-            docsleidos++;
-            System.out.println(docsleidos);
+           docsleidos++;
+        //    time_start= System.currentTimeMillis();
 
             Documento doc = new Documento(k.next().getLink());// crea documento obtenido del iterador de docs
            
                 
                 File archivo = new File(doc.getLink());
             
-            //System.out.println(doc.getLink());
-            //System.out.println(archivo.getPath());
+            
 
             try (Scanner sc = new Scanner(archivo, this.getCodificacion(archivo))) {
                 /*
@@ -118,8 +118,11 @@ mapapalabras.verificarMaximaRepeticionynuevoDocumento();
       
         mapapalabras.reiniciaraparicionyaparicion();
         
+   //     time_end = System.currentTimeMillis();
+    //        System.out.println("Tiempo de procesamiento del doc:"+ docsleidos+ ","+ (time_end-time_start)/1000 +"seg");  
+     if (docsleidos % 50 == 0) System.out.println(docsleidos);
+     
         
-          
         }
        
 //        conjuntodocumentos.persistdocumentos();

@@ -29,15 +29,17 @@ public class DocumentoParaMostrar {
     public void armarDocumento(String ruta) throws FileNotFoundException, IOException {
         String line;
         FileReader f = new FileReader(ruta);
+        int count = 0;
         try (BufferedReader b = new BufferedReader(f)) {
-            while ((line = b.readLine()) != null) {
+            while ((line = b.readLine()) != null && count < 600) {
                 if (!line.isEmpty()) {
                     if (titulo == "") {
                         titulo = line;
                     } else {
                         cuerpo = cuerpo + "\n" + line;
-                    }
+                    }                    
                 }
+                count++;
             }
 
         }

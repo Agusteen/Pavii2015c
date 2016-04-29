@@ -8,6 +8,9 @@
 package logicaIndexado;
 
 //import java.util.Iterator;
+
+import java.util.Objects;
+
 //import java.util.LinkedList;
 
 public class Palabra implements Comparable{
@@ -245,8 +248,26 @@ public class Palabra implements Comparable{
       else if ( i > 0) return 1;
       else return 0;
     
+      
             
     
+    }
+
+    
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Palabra other = (Palabra) obj;
+        if (!Objects.equals(this.cadena, other.cadena)) {
+            return false;
+        }
+        return true;
     }
 
    

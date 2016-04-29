@@ -52,9 +52,20 @@ public class Buscador {
         this.consulta = consulta;
         this.cantidaddocumentostotal = bdmanager.buscarCantidadDocumentostotal();
         String [] cadenasdeconsulta = consulta.split(" ");
+        boolean yaenlista;
         for (String cadena : cadenasdeconsulta) {
+            yaenlista = false;
             Palabra p= bdmanager.buscarPalabra(cadena);
-            if (p != null)listapalabras.add(p);
+            Iterator i= listapalabras.iterator();
+            while (i.hasNext())
+            {
+                Palabra auxp=(Palabra) i.next();
+                if (auxp.equals(p))
+                {yaenlista = true;
+                 break;
+                }
+            }
+            if (p != null && yaenlista == false)listapalabras.add(p);
         }
         
         

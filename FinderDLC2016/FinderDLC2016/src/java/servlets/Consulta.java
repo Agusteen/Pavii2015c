@@ -31,8 +31,8 @@ public class Consulta extends HttpServlet {
             
             String con = request.getParameter("lblConsulta");           
            
-          consulta(con);
-         // index();
+         consulta(con);
+         //index();
 
             response.sendRedirect("ResultadoBusqueda.jsp?consulta=" + con);
         }

@@ -4,6 +4,7 @@
     Author     : agust
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="controladoresWeb.DocumentoParaMostrar"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -17,26 +18,38 @@
         <!-- Bootstrap -->
         <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">        
         <link rel="stylesheet" href="bootstrap/css/bootstrap.css" type="text/css">
+        <script src="bootstrap/js/bootstrap.js" type="text/javascript"></script>        
+        <script src="http://code.jquery.com/jquery-2.0.3.min.js" type="text/javascript"></script>
+        <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js" type="text/javascript"></script>
     </head>
     <body>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#tooltip1').tooltip();
+            });
+        </script>
 
         <div id="wrap">
 
             <div class='text-left col-md-3'><img style="width: 75%; height: 75%; margin-left: 25%; margin-top: 1.5%" src="bootstrap/css/logo1.png" alt=""/></div>
-                <% DocumentoParaMostrar p = (DocumentoParaMostrar) request.getAttribute("documento");  %>
+                <% DocumentoParaMostrar p = (DocumentoParaMostrar) request.getAttribute("documento");%>
             <div id="wrap">
                 <div id="content">
                     <div class="col-md-8 col-md-offset-2" style="margin-top: 1.5%">    
                         <div class="panel panel-default">
+
                             <div class="panel panel-title">
+                                <div class="text-right" style="margin-top: 1%; margin-right: 1%">
+                                    <a href="file:///<%=p.getRuta()%>" target="_blank"><button  class="btn btn-primary" id="tooltip1" data-placement="bottom" data-toggle="tooltip" title="Solo para Internet Explorer"><span class="glyphicon glyphicon-download-alt"></span></button></a>                                    
+                                </div>
                                 <h2 class="text-center">                                    
-                                    <%= p.getTitulo() %>
-                                        
+                                    <%= p.getTitulo()%>
+
                                 </h2>
                             </div>
                             <div class="panel-body">
                                 <p> 
-                                    <%= p.getCuerpo() %>
+                                    <%= p.getCuerpo()%>
                                 </p>
                             </div>
                         </div>

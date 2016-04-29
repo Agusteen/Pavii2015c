@@ -14,6 +14,7 @@ public class DocumentoParaMostrar {
 
     String titulo = "";
     String cuerpo = "";
+    String ruta = "";
 
     public DocumentoParaMostrar() {
     }
@@ -25,13 +26,18 @@ public class DocumentoParaMostrar {
     public String getCuerpo() {
         return cuerpo;
     }
+    
+    public String getRuta() {
+        return ruta;
+    }
 
     public void armarDocumento(String ruta) throws FileNotFoundException, IOException {
         String line;
+        this.ruta = ruta;
         FileReader f = new FileReader(ruta);
         int count = 0;
         try (BufferedReader b = new BufferedReader(f)) {
-            while ((line = b.readLine()) != null && count < 600) {
+            while ((line = b.readLine()) != null && count < 500) {
                 if (!line.isEmpty()) {
                     if (titulo == "") {
                         titulo = line;

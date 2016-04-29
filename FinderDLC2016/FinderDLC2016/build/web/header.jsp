@@ -6,7 +6,7 @@
 
 <form method="get" action="Consulta">
     
-    <div class='text-left col-md-3'><img style="width: 75%; height: 75%; margin-left: 25%; margin-top: 1.5%" src="bootstrap/css/logo1.png" alt=""/></div>
+    <div class='text-left col-md-3'><a href="index.html"><img style="width: 75%; height: 75%; margin-left: 25%; margin-top: 1.5%" src="bootstrap/css/logo1.png" alt="" /></a></div>
     <div class="col-lg-8" style="margin-top: 1.5%">
         <div class="row">
             

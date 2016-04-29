@@ -19,6 +19,9 @@ import logicaIndexado.Coordinador;
  * @author agust
  */
 public class AgregarDocumento extends HttpServlet {
+    
+    LinkedList <String> documentosagregados = new LinkedList<>();
+    LinkedList <String> documentosborrados = new LinkedList<>();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -49,18 +52,19 @@ public class AgregarDocumento extends HttpServlet {
                 out.println("</head>");
                 out.println("<body>");
                 out.println("<h1>Los documentos se agregaron correctamente.</h1>");
+                out.println("<h3>Documentos agregados: "+documentosagregados.toString()+"</h3>");
+                out.println("<h3>Documentos eliminados: "+documentosborrados.toString()+"</h3>");
                 out.println("</br><a href=index.html>Volver</a>");
                 out.println("</body>");
                 out.println("</html>");
-
+                    
             }
         }
 
     }
 
     public void index() throws IOException {
-        LinkedList <String> documentosagregados = new LinkedList<>();
-        LinkedList <String> documentosborrados = new LinkedList<>();
+        
         LecturaDirectorio ld = new LecturaDirectorio();
 
         File[] directorios = ld.leerDirectorio(getServletContext().getRealPath("/") + "..\\..\\..\\NuevosDocumentos");

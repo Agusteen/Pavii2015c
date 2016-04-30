@@ -415,6 +415,11 @@ return list;
         return cantidad;
     }
 
+    /**
+     * Recupera de la base de datos la cantidad de documentos distintos en donde esta la cadena mandada por parametro.
+     * @param cadena Cadena sobre la cual se busca los documentos distintos donde aparece.
+     * @return un valor numerico que es la cantidad de documentos distintos donde aparece la cadena.
+     */
     public int buscarCantidadDocumentosDistintos(String cadena) {
         int cantidad = 0;
         Documento d;

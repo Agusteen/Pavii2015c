@@ -100,7 +100,7 @@ public class Buscador {
                     String link= posteo.getLink();
                     int frecuenciadeterminoPorDocumento = posteo.getFrecuenciadeterminoPorDocumento();
                             int docstotales = cantidaddocumentostotal;
-                            int docsdiferentesportermino = p.getDocumentosDiferentes();
+                            int docsdiferentesportermino = bdmanager.buscarCantidadDocumentosDistintos(p.getCadena());
                     DocumentoConsulta documentoconsulta= new DocumentoConsulta(link,frecuenciadeterminoPorDocumento,docstotales,docsdiferentesportermino);
                     
                     ranking.addDoc(documentoconsulta);

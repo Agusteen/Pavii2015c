@@ -415,6 +415,36 @@ return list;
         return cantidad;
     }
 
+    public int buscarCantidadDocumentosDistintos(String cadena) {
+        int cantidad = 0;
+        Documento d;
+        query = "select count(*) as 'Cantidad' from POSTEO where palabra like ?;";
+        try {
+            ps = connection.prepareStatement(query);
+            ps.setString(1, cadena);
+            statement = connection.createStatement();
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                cantidad = rs.getInt("Cantidad");
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error " + ex.getMessage());
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException ex) {
+
+                    System.out.println("Error " + ex.getMessage());
+                }
+            }
+
+        }
+
+        return cantidad;
+    }
+    
+    
     /**
      * Busca la existencia de una palabra en al base de datos.
      * @param cadena Es la cadena que se ba a buscar en la base de datos para verificar su existencia. 

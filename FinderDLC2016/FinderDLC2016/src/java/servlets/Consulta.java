@@ -20,7 +20,8 @@ import logicaIndexado.Coordinador;
 
 /**
  *
- * @author agust
+ * @author Muñoz Campos, Agustín (62846)
+ * Ramírez, Nicolás (63318)
  */
 public class Consulta extends HttpServlet {
 
@@ -37,10 +38,17 @@ public class Consulta extends HttpServlet {
             response.sendRedirect("ResultadoBusqueda.jsp?consulta=" + con);
         }
     }
-    
+    /**
+     * Crea una lista de resultados para la consulta mandada como parametro, la
+     * cantidad de documentos a mostrar (cantidad de resultados) por defecto es 10.
+     * Salvo que los resultados obtenidos sea menor a 10.
+     * 
+     * @param con consulta que va a ser procesada
+     * @throws IOException 
+     */
     public void consulta(String con) throws IOException
     {
-        ListaResultados.getInstance().nuevaLista();
+           ListaResultados.getInstance().nuevaLista();
 
             Buscador b = new Buscador(getServletContext().getRealPath("/"));
             int cantidadDocumentosAMostrar = 10;
@@ -59,6 +67,10 @@ public class Consulta extends HttpServlet {
             }
     }
     
+    /**
+     * Lee la carpeta DocumentosTpTest a partir de la cual toma todos los documentos que se encuentran en esta, 
+     * carga los documentos y los procesa.
+     */
     public void index()
     {
          LecturaDirectorio ld = new LecturaDirectorio();           

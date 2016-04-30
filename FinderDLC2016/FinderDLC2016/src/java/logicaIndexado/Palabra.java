@@ -1,8 +1,7 @@
 
 /**
  *
- * @author 
- * Muñoz Campos, Agustín (62846)
+ * @author Muñoz Campos, Agustín (62846)
  * Ramírez, Nicolás (63318)
  */
 package logicaIndexado;
@@ -45,10 +44,14 @@ public class Palabra implements Comparable{
         
     }
 
-    /*
-    Crea un objeto palabra, identeifica si la cadena que ingresa es alfanumerica
-    en el caso de la cadena tener guiones (-) al inicio o al final los elimina
-    */
+    
+    /**
+     * Implementacion del patron Factory.
+     * Crea un objeto palabra en el caso de la cadena tener guiones (-) al inicio o al final los elimina.
+     * Si la cadena es alfanumerica o solo númerica la almacena como palabra.
+     * @param p cadena a partir del cual se quiere crear una palabra.
+     * @return una palabra si la creacion no tuvo problemas, null en caso de no poder crease la palabra.
+     */
     public static Palabra generarPalabra(String p) {
         
         //Para palabras alfanumericas
@@ -94,6 +97,7 @@ public class Palabra implements Comparable{
 
     }
 
+    
     public int getRepeticionpordocumento() {
         return repeticionpordocumento;
     }
@@ -102,69 +106,31 @@ public class Palabra implements Comparable{
     public void setContador(int con) {
         repeticionpordocumento = con;
     }
-/*
-    Agrega un documento, si ya existe no lo agrega
+
+   /**
+    * Agrega un documento a la palabra
+    * @param d Documento que se desea agregar a la palabra.
     */
     public void addDocument(Documento d) {
         if (d == null) {
             return;
         }
         doc = d; 
-//        if (!this.contieneDoc(d)) {
-//            docs.add(d);
-//            cantidaddocs++;
-//        }
+
     }
 
-   public void trash()
-   {
-//      public Iterator getIteratorDocs() {
-//        return docs.iterator();
-//    } 
-       
-//      public Documento ultimoDoc() {
-//        return docs.getLast();
-//    } 
-       
-//       public void setCantidadDocumentos(int c)
-//    {
-//       
-//       cantidaddocs = c;
-//    }
-       
-//         public int getCantidadDocumentos()
-//    {
-//                return cantidaddocs;
-//    }
-       
-       /*
-    Busca un documento en la lista de documentos retorna true si existe ya 
-    el documento, false si no existe
-    */
-//    private boolean contieneDoc(Documento doc) {
-//        if( docs.isEmpty()) return false;
-//        else {
-//        //Toma el ultimo elemento de la lista donde es mas probable encontrar el mismo documento
-//        if (docs.getLast().equals(doc)) {
-//            return true;
-//            }
-//        }
-//        //verifica si el documento existe en toda la lista.
-//        for (Documento d : docs) {
-//            if (d.equals(doc)) {
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-   }
+   
 
     public Documento getDoc() {
         return doc;
     }
    
    
-    
+    /**
+     * Verifica la repeticion máxima, si la repeticion actual de la palabra por documento es menor 
+     * la repeticion máxima permanece igual, si la repeticion actual de la palabra por documento es mayor se actualiza
+     * el valor de repetición máxima.
+     */
    public void verificarRepeticionMaxima()
    {
        if (this.repeticionmaxima < this.repeticionpordocumento)
@@ -211,7 +177,9 @@ public class Palabra implements Comparable{
        this.aparicion = false;
    }
     
-
+/**
+ * Cuenta la repeticion de una palabra.
+ */
     public void contarrepeticion() {
         repeticionpordocumento++;
     }
@@ -239,7 +207,14 @@ public class Palabra implements Comparable{
        repeticionpordocumento = 0;
     }
 
-
+/**
+ * Compara la instancia con otro objeto recibido como parametro.
+ * 
+ * @param o Objeto que se desea comparar.
+ * @return devuelve -1 si la instancia aparece en menos documentos diferentes que el parametro.
+ * +1 si la instancia aparece en mas documentos diferentes que el parametro.
+ * 0 si la instancia y el parametro aparece en iguales documentos diferentes.
+ */
     @Override
     public int compareTo(Object o) {
             Palabra p = (Palabra) o;
@@ -254,7 +229,12 @@ public class Palabra implements Comparable{
     }
 
     
-
+/**
+ * Compara la cadena de una instancia con la cadena del objeto mandado como parametro.
+ * @param obj
+ * @return true si las cadenas de la instancia y del parametro son iguales.
+ * false si las cadenas de la instancia y del parametro son distintas.
+ */
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {

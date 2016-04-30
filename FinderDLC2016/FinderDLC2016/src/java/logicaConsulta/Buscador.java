@@ -8,11 +8,11 @@ import logicaIndexado.*;
 import persistencia.BDManager;
 
 
-
 /**
  *
- * @author nicor_000
- * 
+ * @author 
+ * Muñoz Campos, Agustín (62846) 
+ * Ramírez, Nicolás (63318)
  */
 public class Buscador {
     /**cantidadDocumentos cantidad de documentos a buscar en la consulta (busqueda)**/
@@ -43,7 +43,20 @@ public class Buscador {
 
    
     
-    
+    /**
+     * Recibe una consulta, la separa por palabras y crea una lista de cadenas de consulta,
+     * esta cadena esta conformada por las palabras de la consulta que se encuentran en la base de datos
+     * y de las cuales se van a poder traer resultados posibles, esta lista no tiene palabras (cadenas) repetidas.
+     * La lista de palabras se ordenan en funcion del valor de la palabra para el dominio, luego esta lista es 
+     * recorrida junto con los las listas de posteo correspondientes para cada palabra que es recuperada de base de datos.
+     * Se recorren los posteos y por cada posteo encontrado se crean DocumentosConsulta que poseerá la informacion
+     * de los resultados de la consulta. La lista de DocumentosConsulta que se crea tendra un tamaño fijado como parametro o menor 
+     * en caso de que los posteos encontrados de base de datos sea menor.
+     * Se devuelve luego un iterador de la la clase Ranking que es la clase que maneja los DocumentosConsulta.
+     * @param consulta Una cadena de palabras correspondiente a la consulta a realizarse.
+     * @param cantidadDocumentosAMostrar La canidad de documentos a mostrar como resultado de la consulta.
+     * @return 
+     */
     public Iterator buscarConsulta( String consulta, int cantidadDocumentosAMostrar)
     {
         if (cantidadDocumentosAMostrar <= 0) return null;
@@ -78,8 +91,7 @@ public class Buscador {
         {
             Palabra p =(Palabra) i.next();
             Iterator iteradorposteos = bdmanager.buscarPosteos(p.getCadena(), cantidadDocumentosAMostrar);//traer ordenado
-               // select (info) from POSTEO where palabra = "parametro" order by termfrecuency;
-               // guardar ordenado en una lista y devolver el iterador:
+            
             for (int documentostraidos = 0;documentostraidos < cantidadDocumentosAMostrar ; documentostraidos ++ )
             {
                if(iteradorposteos.hasNext() )
@@ -113,13 +125,7 @@ public class Buscador {
     
     
     
-    /*
-      Nulo: Identificamos cuantos documentos vamos a mostrar.
-     ¨Primero: Debemos buscar por cada palabra de la Consulta su idf, en practica nr ( buscar terminos con menor nr)
-      Segundo: Traer los Primeros R documentos. SI no se llegan a lor R, se busca el proximo con menor nr.
-      Tercer: 
-      
-    */
+   
 
     
 }

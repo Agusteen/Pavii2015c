@@ -16,7 +16,8 @@ import logicaIndexado.Coordinador;
 
 /**
  *
- * @author agust
+ * @author Muñoz Campos, Agustín (62846)
+ * Ramírez, Nicolás (63318)
  */
 public class AgregarDocumento extends HttpServlet {
     
@@ -62,7 +63,13 @@ public class AgregarDocumento extends HttpServlet {
         }
 
     }
-
+/**
+ * Realiza la lectura del directorio Nuevos documentos, en caso de encontrar documentos son agregados para ser procesados,
+ * solo si los mismos no se encuentran en la base de datos y no se encuentran en carpeta de destino. Previamente luego de 
+ * leer los documentos se mueven a la carpeta de destino para poder ser accedidos al momento de abrir los resultados de las busquedas.
+ * 
+ * @throws IOException 
+ */
     public void index() throws IOException {
         
         LecturaDirectorio ld = new LecturaDirectorio();

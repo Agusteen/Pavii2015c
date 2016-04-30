@@ -29,16 +29,21 @@ public class AllDocuments {
 
     }
 
+    /**
+     * Devuelve el tamaño de la lista de documentos.
+     * @return tamaño de la lista de documentos.
+     */
     public int count() {
         return lista.size();
     }
-
-    /*
-     Agrega documentos en la lista de documentos solo si los documentos 
-     no se encuentran la base de datos o en la lista de documentos de la propia clase
-     Envia mensajes de la situacion de cada documento en cada caso
-      
-     */
+    
+/**
+ * Agrega documentos en la lista de documentos solo si los documentos 
+ * no se encuentran la base de datos o en la lista de documentos de la propia clase
+ * @param link La ruta del documento que desea agregarse a la lista de documentos
+ * @return true si el documento pudo guardarse en la lista, false si el documento
+ * no pudo guardarse en la lista por cualquier motivo.
+ */
     public boolean addDocument(String link) {
 
         if (link == null) {
@@ -72,8 +77,12 @@ public class AllDocuments {
 
     }
 
-    /*
-     Valida si un documento se encuentra en la lista de documentos de la clase
+   
+    /**
+     * Valida si un documento se encuentra en la lista de documentos de la clase.
+     * @param doc documento que se desea buscar en la lista de documentos de la clase.
+     * @return true si el documento se encuentra en la lista de documentos de la clase,
+     * false si el documento no se encuentra en la lista de documentos de la clase.
      */
     private boolean contieneDoc(Documento doc) {
         if (lista.isEmpty()) {
@@ -96,18 +105,26 @@ public class AllDocuments {
         bdmanager.persistDoc(lista.iterator());
     }
 
+    /**
+     * Limpia los atributos de la clase.
+     */
     public void clear() {
         lista = null;
         lista = new LinkedList<>();
         docsBD = null;
         docsBD = new LinkedList<>();
     }
-
+/**
+ *  Recupera de la base de datos una lista de documentos y lo almacena en la variable docsDB
+ */
     public void recuperarDocs() {
         docsBD = bdmanager.materializeDocs();
        
     }
-
+/**
+ * Persiste un documento mandado como parametro en la base de datos.
+ * @param doc Documento que se desea persistir en la base de datos.
+ */
     void persistdocumento(Documento doc) {
         bdmanager.persistDoc(doc);    }
 }

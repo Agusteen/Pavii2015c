@@ -8,7 +8,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import logicaIndexado.*;
@@ -35,18 +34,10 @@ public class BDManager {
     private PreparedStatement psaux3 = null;
     private PreparedStatement pioi = null;
     private PreparedStatement pior = null;
-
-    private String connectionString = "jdbc:sqlite:C:\\Users\\nicor_000\\Documents\\GitHub\\FinderV1.2\\PruebaBootsrapV1.2\\DB\\BuscadorVectorial";
-    //private String connectionString = "jdbc:sqlite:C:\\Users\\nicor_000\\Documents\\GitHub\\FinderV1.2\\PruebaBootsrapV1.2\\DB\\BuscadorVectorial";
-
+    private String connectionString;
+    
     private BDManager() {
-        /*
-        String error = connect();
-        if (!error.equals("")) {
-            System.out.println("" + error);
-
-        }
-*/
+       
     }
     /**
      * Recibe el contexto de la aplicacion y tranforma el contexto en la cadena que usara la clase para conectarse a la BD
@@ -56,6 +47,10 @@ public class BDManager {
         this.connectionString = "jdbc:sqlite:"+connectionString+"..\\..\\..\\DB\\BuscadorVectorial";
     }
 
+    /**
+     * Realiza la conexión de la base de datos
+     * @return Una cadena con el error en caso de que lo hubiera
+     */
     public String connect() {
         try {
             Class.forName("org.sqlite.JDBC");
@@ -69,6 +64,11 @@ public class BDManager {
         return "";
     }
 
+    /**
+     * Implementación de singleton, retorna la instancia de la clase si existe, en caso de que no existiera crea la instancia
+     * y la devuelve.
+     * @return la unica instancia de la clase BDManager
+     */
     public static BDManager getBDManager() {
         if (singleIntance != null) {
             return singleIntance;
@@ -81,7 +81,7 @@ public class BDManager {
     /**
      * Almacena en la BD un documento.
      *
-     * @param d documento
+     * @param d documento que se desea persistir.
      */
     public void persistDoc(Documento d) {
 
@@ -115,6 +115,10 @@ public class BDManager {
 
     }
 
+    /**
+     * Almacena en la base de datos todas las palabras que estan en memoria, correspondientes al documento que se esta leyendo
+     * @param i Recibe un iterador de la colección de palabras que se encuentra en memoria.
+     */
     public void persistpalabras(Iterator<Palabra> i) {
 
         Palabra p = null;
@@ -349,14 +353,7 @@ public class BDManager {
 
     }
 
-    /**
-     * Almacena en la BD todas las palabras
-     *
-     * @param i iterador de la lista o coleccion de palabras.
-     * @param mapapalabras puntero para el envio de mensajes.
-     * @param contador cantidad de palabras que debe almacenar.
-     *
-     */
+    
     /**
      *
      * @return retorna una lista con los documentos que se recuperan de la BD.
@@ -384,6 +381,10 @@ return list;
 
     }
 
+    /**
+     * Recupera de la base de datos la cantidad de documentos distintos que se encuentran cargados
+     * @return 
+     */
     public int buscarCantidadDocumentostotal() {
         statement = null;
 
@@ -414,6 +415,11 @@ return list;
         return cantidad;
     }
 
+    /**
+     * Busca la existencia de una palabra en al base de datos.
+     * @param cadena Es la cadena que se ba a buscar en la base de datos para verificar su existencia. 
+     * @return Retorna la palabra que encuentra en la base de datos o null en caso de no encontrarla.
+     */
     public Palabra buscarPalabra(String cadena) {
         ps = null;
         Palabra palabra = null;
@@ -448,6 +454,16 @@ return list;
         return palabra;
     }
 
+    /**
+     * Recuperar una cantidad específica de posteos de base de datos correspondientes 
+     * a la cadena mandada como parámetro, el ordenamiento de la consulta es en orden 
+     * descendente sin embargo la lista generada se ordena posteriormente de menor a mayor
+     * y se retorna un iterador descendente de manera de recorrer los posteos de mayor 
+     * a menor debido a la naturaleza del dominio.
+     * @param cadena La cadena correspondientes con la que se buscaran los posteos
+     * @param cantidadDocumentosAMostrar La cantidad de posteos a traer
+     * @return Iterador descendente que recorra los posteos de mayor a menor en funcion de la frecuencia de los mismos.
+     */
     public Iterator buscarPosteos(String cadena, int cantidadDocumentosAMostrar) {
         LinkedList<Posteo> listaposteos = new LinkedList<>();;
         ps = null;

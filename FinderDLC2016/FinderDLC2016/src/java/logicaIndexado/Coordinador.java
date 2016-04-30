@@ -18,8 +18,7 @@ import persistencia.BDManager;
 
 /**
  *
- * @author Ariza, Gonzalo (62069)
- * Muñoz Campos, Agustín (62846)
+ * @author Muñoz Campos, Agustín (62846)
  * Ramírez, Nicolás (63318)
  */
 public class Coordinador {
@@ -43,7 +42,12 @@ public class Coordinador {
       
     }
 
-    /*Quien cargue los documentos podria llamar a este metodo dandole los links*/
+    /**
+     * Carga los documentos que van a ser procesados 
+     * @param link Ruta del documento que se va a agregar al conjunto de documentos.
+     * @return true si el documento fue guardado en el conjunto de documentos, false si el 
+     * documento no pudo ser guardado por cualquier motivo.
+     */
     public boolean loadDocs(String link) {
         if (!link.isEmpty()) {
           if(conjuntodocumentos.addDocument(link)) return true;
@@ -51,6 +55,11 @@ public class Coordinador {
         return false;
     }
 
+    /**
+     * Busca la codificacion del archivo para poder ser procesado.
+     * @param archivo Archivo que se quiere leer para procesar.
+     * @return Cadena con la codificacion del archivo que se quiere leer.
+     */
     public String getCodificacion(File archivo) {
         String codificacion = "";
         try {
@@ -65,6 +74,12 @@ public class Coordinador {
         return codificacion;
     }
 
+    /**
+     * Procesa todos los documentos del conjunto de documentos palabra por palabra segun un patron 
+     * preestablecido, por cada documento se verifica la maxima repeticion de cada palabra y se registra la lectura de 
+     * un nuevo documento, persiste el documento seguido de las palabras( sus listas de posteo tambien) que aparecen en cada documento
+     * reinicia la aparicion de cada una de las palabras que se encuentra en memoria antes de comenzar la lectura de otro documento
+     */
     public void processdocs() {
 
         Iterator<Documento> k = conjuntodocumentos.getIteratorDocuments();
@@ -133,27 +148,6 @@ mapapalabras.verificarMaximaRepeticionynuevoDocumento();
         
     }
 
-    public void registrarInicioPersist() {
-       
-    }
-
-    public void registrarAvancePersist() {
-        
-    }
-
-    void registrarFinPersist() {
-        
-    }
-
-  
-
-//    public String buscarPalabra(String cadena) {
-//        return bdmanager.materializeAparicion(cadena).toString();
-//    }
-    /*
-     Calcula el progreso de lectura de documentos
-     */
-   
 
     
 

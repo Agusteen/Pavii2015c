@@ -8,7 +8,9 @@ import java.io.IOException;
 
 /**
  *
- * @author agust
+ * @author 
+ * Muñoz Campos, Agustín (62846) 
+ * Ramírez, Nicolás (63318)
  */
 public class DocumentoParaMostrar {
 
@@ -31,6 +33,12 @@ public class DocumentoParaMostrar {
         return ruta;
     }
 
+    /**
+     * Crea el documento que se mostrara luego de hacer click en el resultado de una consulta
+     * @param ruta La ruta de ubicacion del documento.
+     * @throws FileNotFoundException
+     * @throws IOException 
+     */
     public void armarDocumento(String ruta) throws FileNotFoundException, IOException {
         String line;
         this.ruta = ruta;

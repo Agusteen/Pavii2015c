@@ -8,7 +8,9 @@ import java.io.IOException;
 
 /**
  *
- * @author agust
+ * @author 
+ * Muñoz Campos, Agustín (62846) 
+ * Ramírez, Nicolás (63318)
  */
 public class Resultado {
     
@@ -33,9 +35,20 @@ public class Resultado {
     public String getNombreArchivo() {
         return nombreArchivo;
     }    
-        public float getPonderacion() {
+    
+    public float getPonderacion() {
         return ponderacion;
-    }    
+    }   
+    
+    /**
+     * Se setean los atributos de la clase a partir de una Ruta a un documento
+     * Se leen las primeras 600 palabras del documento para tener una previsualizacion del resultado de la busqueda.
+     * Se setea la ponderacion tambien para poder mostrarlos en los resultados de la busqueda.
+     * @param ruta Donde se encuentra el documento que es un resultado de la consulta.
+     * @param ponderacion Valor de ponderacion que tiene el documento frente a una consulta.
+     * @throws FileNotFoundException
+     * @throws IOException 
+     */
     public void obtenerDatos(String ruta, float ponderacion) throws FileNotFoundException, IOException
     {
             File f = new File(ruta);
@@ -67,10 +80,7 @@ public class Resultado {
                 {
                     detalle = detalle + ". ";
                 }
-            }
-//                System.out.println(nombreArchivo);
-//                System.out.println(titulo);
-//                System.out.println(detalle+"...");            
+            }          
     }
     
 }
